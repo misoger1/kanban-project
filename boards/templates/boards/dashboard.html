@@ -1,0 +1,24 @@
+{% extends 'boards/base.html' %}
+{% block content %}
+<h2>Ваши доски</h2>
+<div style="background: white; padding: 20px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h3>Создать новую доску</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Создать</button>
+    </form>
+</div>
+
+<h3>Список досок</h3>
+<ul>
+    {% for board in boards %}
+        <li style="margin-bottom: 10px; font-size: 1.1rem;">
+            <a href="{% url 'board_detail' board.id %}">{{ board.title }}</a> 
+            <a href="{% url 'delete_board' board.id %}" style="color: red; font-size: 0.9rem; margin-left: 10px;">[Удалить]</a>
+        </li>
+    {% empty %}
+        <p>У вас пока нет досок. Создайте первую!</p>
+    {% endfor %}
+</ul>
+{% endblock %}

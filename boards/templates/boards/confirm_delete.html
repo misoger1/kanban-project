@@ -1,0 +1,16 @@
+{% extends 'boards/base.html' %}
+{% block content %}
+<div style="max-width: 400px; background: white; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <h2>Подтверждение удаления</h2>
+    <p>Вы действительно хотите удалить {{ type }} "<strong>{{ object.title }}</strong>"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Да, удалить</button>
+        {% if object.column %}
+            <a href="{% url 'board_detail' object.column.board.id %}" style="margin-left: 10px;">Отмена</a>
+        {% else %}
+            <a href="{% url 'dashboard' %}" style="margin-left: 10px;">Отмена</a>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

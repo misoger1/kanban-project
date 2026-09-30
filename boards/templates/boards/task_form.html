@@ -1,0 +1,10 @@
+{% extends 'boards/base.html' %}
+{% block content %}
+<h2>Задача</h2>
+<form method="post" style="max-width: 500px; background: white; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Сохранить</button>
+    <a href="{% url 'board_detail' board.id %}" style="margin-left: 10px;">Отмена</a>
+</form>
+{% endblock %}
